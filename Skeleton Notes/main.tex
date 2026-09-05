@@ -1,0 +1,25 @@
+\documentclass[11pt,openany]{book}
+
+\usepackage{subfiles}
+\usepackage{common/skeleton-notes}
+% Each day's example numbers restart, so PDF destinations must be unique.
+\hypersetup{hypertexnames=false}
+
+\title{Calculus Skeleton Notes}
+
+\begin{document}
+
+\frontmatter
+\maketitle
+\tableofcontents
+
+\mainmatter
+% September 9
+\addtocontents{toc}{\protect\contentsline {chapter}{Introduction to Calculus}{}{}}
+\subfile{days/Sept-9-Intro}
+\newpage
+% September 11
+\addtocontents{toc}{\protect\contentsline {chapter}{1.1 - Limits}{}{}}
+\subfile{days/Sept-11-Limits}
+
+\end{document}

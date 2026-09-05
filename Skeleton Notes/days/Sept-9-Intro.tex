@@ -1,0 +1,167 @@
+\documentclass[../main.tex]{subfiles}
+
+\title{Average Rates of Change}
+\showsolutionsfalse % Use \showsolutionstrue for the instructor copy.
+
+\begin{document}
+
+\maketitle
+
+\goals{Compute average rates of change, slopes of secant lines, and motivate the idea of limits}
+
+\beforeclassvideos{None today, starting next class}
+
+\vspace{0.5em}
+\hrule
+\vspace{0.5em}
+
+\Example I left my house at time $t=0$. $30$ minutes later, I was at UVic which is $12$ km away. 
+
+\begin{enumerate}
+\item[a)] What was my average speed? 
+\sol{\[
+\text{Average Speed}=\frac{\Delta\text{ distance}}{\Delta\text{ time}}
+=\frac{12\text{ km}}{0.5\text{ h}}=24\text{ km/h}.
+\]
+
+\vspace{0.5in}}
+
+\item[b)] Sketch a possible graph
+
+\sol{
+% Average speed and instantaneous speed
+\begin{center}
+\begin{tikzpicture}[x=0.65cm,y=0.32cm]
+	\draw[note axis] (0,0)--(14,0) node[right]{time};
+	\draw[note axis] (0,0)--(0,13) node[above]{distance};
+	\draw[blue,note curve] plot coordinates {(0,0)(1,0.8)(2,2.2)(3,4.5)(4,7)(5,9)(6,10.3)(8,11.5)(10,12)};
+	\draw (0,0)--(10,12);
+	\draw[note dashed] (4,0)--(4,7) (5,0)--(5,9) (10,0)--(10,12) (0,12)--(10,12);
+	\node[below] at (4,0){10};
+	\node[below] at (5,0){12};
+	\node[below,text=red] at (10,0){30 min};
+	\node[left] at (0,12){12 km};
+	\node[closed point,fill=red,draw=red] at (0,0){};
+	\node[closed point,fill=red,draw=red] at (10,12){};
+	\node[above right] at (10,12){$(30,12)$};
+	\node[below left,text=red,align=left] at (0,0){left house\\at $t=0$};
+	\draw[ForestGreen,thick] (3.7,6.6)--(5.3,9.4);
+\end{tikzpicture}
+\end{center}}
+
+\item[c)] How could I approximate my speed at $t=10$ minutes? 
+\end{enumerate}
+
+
+\sol{
+Starting at 10 min, I go 1 km in 2 min.
+
+\[
+\text{Average speed}=\frac{1\text{ km}}{2/60\text{ h}}=30\text{ km/h}.
+\]
+How can I approximate my speed at 10 min?
+
+
+Compute average velocity over $[10,11]$, $[10,10.1]$, $[10,10.01]$, etc
+
+Tell LIDAR story
+
+\vspace{1in}
+
+\textbf{Future:} ``Need instantaneous velocity!''
+}
+
+
+\Example What is average rate of change of $f(x)=x^2$ on $[2,4]$?
+
+\sol{ Average rate of change $\frac{f(4)-f(2)}{4-2}=\frac{16-4}{4-2}=6$
+
+
+\vspace{1in}
+
+}
+
+\newpage
+
+
+\Example Find the equation of the line through $(x_1,y_1)$ and $(x_2,y_2)$. 
+
+\sol{
+
+\begin{center}
+\begin{tikzpicture}[x=1.1cm,y=0.85cm]
+	\draw[note axis] (-0.2,0)--(4.4,0);
+	\draw[note axis] (0,-0.2)--(0,3.5);
+	\draw[thick] (0.3,0.3)--(3.8,3.1);
+	\foreach \x/\y/\labx/\laby in {1/0.86/x_1/y_1,2.5/2.06/x_2/y_2,3.8/3.1/x/y}{
+		\node[closed point] at (\x,\y){};
+		\draw[note dashed] (\x,0)--(\x,\y) (0,\y)--(\x,\y);
+		\node[below] at (\x,0){$\labx$};
+		\node[left] at (0,\y){$\laby$};
+	}
+\end{tikzpicture}
+\end{center}
+
+
+\[
+\text{Slope}=\frac{y_2-y_1}{x_2-x_1}=m,
+\qquad
+m=\frac{y-y_1}{x-x_1}.
+\]
+
+\[
+y-y_1=m(x-x_1)
+\quad\Longrightarrow\quad
+y=y_1+m(x-x_1)=mx+\underbrace{[y_1-mx_1]}_{b}.
+\]
+}
+
+\Example Consider the graph of a function $f(x)$. How do I write an equation for the secant line through $(x_1,f(x_1))$ and $(x_2,f(x_2))$?
+
+
+
+\sol{
+\[
+\text{Answer}\qquad
+y=f(a)+\frac{f(b)-f(a)}{b-a}(x-a).
+\]
+
+
+
+
+\begin{center}
+\begin{tikzpicture}[x=1cm,y=0.75cm]
+	\draw[note axis] (0,0)--(5.4,0);
+	\draw[note axis] (0,0)--(0,4.2);
+	\draw[red,note curve] plot coordinates {(0.8,0)(1.2,1.2)(1.7,1.7)(2.5,1.85)(3.1,2.2)(3.7,3.7)(4.4,4.1)};
+	\draw[blue,thick] (1.25,1.15)--(3.8,2.45);
+	\draw[black,thick] (1.25,1.15)--(4.35,4.05);
+	\draw[ForestGreen,thick] (1.25,1.15)--(2.4,2.45);
+	\node[closed point] at (1.25,1.15){};
+	\draw[note dashed] (1.25,0)--(1.25,1.15) (0,1.15)--(1.25,1.15);
+	\draw[note dashed] (4.35,0)--(4.35,4.05) (0,4.05)--(4.35,4.05);
+	\node[below] at (1.25,0){$a$};
+	\node[left] at (0,1.15){$f(a)$};
+	\node[above right,text=red] at (4.2,4.05){$f(a+h)$};
+\end{tikzpicture}
+\end{center}
+
+Slope of secant line
+\[
+=\frac{f(a+h)-f(a)}{(a+h)-a}=\frac{\text{rise}}{\text{run}}.
+\]
+
+}
+
+\vfill
+
+{\bf Big Idea:} As $x_2$ gets closer to $x_1$ the slope of the secant line approaches the slope of the tangent line at $x_1$. We need to investigate and define this limiting process more precisely. 
+
+\vfill
+\vspace{0.25em}
+\hrule
+\vspace{0.5em}
+
+\afterclassproblems{None today, but review the Course Outline on Brightspace}
+
+\end{document}
